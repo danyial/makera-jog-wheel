@@ -1,0 +1,253 @@
+{
+ "commands": [
+  {
+   "command": "component.insert_design",
+   "params": {
+    "path": "handrad_enclosure.sc",
+    "name": "Gehaeuse"
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "FrontShell"
+    ],
+    "color": "#3b82c4",
+    "opacity": 0.35
+   }
+  },
+  {
+   "command": "appearance.assign",
+   "params": {
+    "bodies": [
+     "BottomTray"
+    ],
+    "color": "#9aa0a6",
+    "opacity": 0.5
+   }
+  },
+  {
+   "command": "component.activate",
+   "params": {
+    "component": "root"
+   }
+  },
+  {
+   "command": "file.insert_step",
+   "params": {
+    "path": "../handrad_pcb/fab/handrad.step",
+    "name": "Traegerplatine",
+    "matrix": [
+     1,
+     0,
+     0,
+     3.5,
+     0,
+     1,
+     0,
+     188.0,
+     0,
+     0,
+     1,
+     7.0
+    ]
+   }
+  },
+  {
+   "command": "component.activate",
+   "params": {
+    "component": "root"
+   }
+  },
+  {
+   "command": "file.insert_step",
+   "params": {
+    "path": "../vendor/enclosure/oled_1p3.step",
+    "name": "Display",
+    "matrix": [
+     1,
+     0,
+     0,
+     30.8,
+     0,
+     1,
+     0,
+     158.5,
+     0,
+     0,
+     1,
+     35.5
+    ]
+   }
+  },
+  {
+   "command": "component.activate",
+   "params": {
+    "component": "root"
+   }
+  },
+  {
+   "command": "file.insert_step",
+   "params": {
+    "path": "../vendor/enclosure/button_12mm.step",
+    "name": "Taster_X",
+    "matrix": [
+     1,
+     0,
+     0,
+     16,
+     0,
+     0,
+     1,
+     113.461859,
+     0,
+     -1,
+     0,
+     27.83427
+    ]
+   }
+  },
+  {
+   "command": "component.activate",
+   "params": {
+    "component": "root"
+   }
+  },
+  {
+   "command": "file.insert_step",
+   "params": {
+    "path": "../vendor/enclosure/button_12mm.step",
+    "name": "Taster_Y",
+    "matrix": [
+     1,
+     0,
+     0,
+     36,
+     0,
+     0,
+     1,
+     113.461859,
+     0,
+     -1,
+     0,
+     27.83427
+    ]
+   }
+  },
+  {
+   "command": "component.activate",
+   "params": {
+    "component": "root"
+   }
+  },
+  {
+   "command": "file.insert_step",
+   "params": {
+    "path": "../vendor/enclosure/button_12mm.step",
+    "name": "Taster_Z",
+    "matrix": [
+     1,
+     0,
+     0,
+     56,
+     0,
+     0,
+     1,
+     113.461859,
+     0,
+     -1,
+     0,
+     27.83427
+    ]
+   }
+  },
+  {
+   "command": "component.activate",
+   "params": {
+    "component": "root"
+   }
+  },
+  {
+   "command": "file.insert_step",
+   "params": {
+    "path": "../vendor/enclosure/button_12mm.step",
+    "name": "Taster_A",
+    "matrix": [
+     1,
+     0,
+     0,
+     76,
+     0,
+     0,
+     1,
+     113.461859,
+     0,
+     -1,
+     0,
+     27.83427
+    ]
+   }
+  },
+  {
+   "command": "component.activate",
+   "params": {
+    "component": "root"
+   }
+  },
+  {
+   "command": "file.insert_step",
+   "params": {
+    "path": "../vendor/enclosure/button_12mm.step",
+    "name": "EinAus",
+    "matrix": [
+     0,
+     -1,
+     0,
+     79.83427,
+     1,
+     0,
+     0,
+     92.0,
+     0,
+     0,
+     1,
+     24.461859
+    ]
+   }
+  },
+  {
+   "command": "component.activate",
+   "params": {
+    "component": "root"
+   }
+  },
+  {
+   "command": "file.insert_step",
+   "params": {
+    "path": "../vendor/enclosure/zss600.step",
+    "name": "Handrad",
+    "matrix": [
+     1,
+     0,
+     0,
+     46,
+     0,
+     1,
+     0,
+     50.0,
+     0,
+     0,
+     1,
+     33.6
+    ]
+   }
+  },
+  {
+   "command": "component.activate",
+   "params": {
+    "component": "root"
+   }
+  }
+ ]
+}

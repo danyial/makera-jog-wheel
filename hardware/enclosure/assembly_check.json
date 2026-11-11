@@ -1,0 +1,588 @@
+{
+ "commands": [
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_PCB",
+    "body_name": "P_PCB",
+    "length": 78.0,
+    "width": 66,
+    "height": 1.6,
+    "corner": [
+     3.5,
+     122.0,
+     7
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_PCB_SMD",
+    "body_name": "P_PCB_SMD",
+    "length": 78.0,
+    "width": 64,
+    "height": 2.4,
+    "corner": [
+     3.5,
+     122.0,
+     4.6
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_Sockets",
+    "body_name": "P_Sockets",
+    "length": 60.0,
+    "width": 25.4,
+    "height": 11.0,
+    "corner": [
+     3.9,
+     155.3,
+     8.6
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_FireBeetle",
+    "body_name": "P_FireBeetle",
+    "length": 60.0,
+    "width": 25.4,
+    "height": 4.9,
+    "corner": [
+     3.9,
+     155.3,
+     19.6
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_USBC",
+    "body_name": "P_USBC",
+    "length": 1.4,
+    "width": 8.94,
+    "height": 3.16,
+    "corner": [
+     2.5,
+     164.33,
+     21.295
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_JST_J1J2",
+    "body_name": "P_JST_J1J2",
+    "length": 7.0,
+    "width": 10.0,
+    "height": 13.4,
+    "corner": [
+     66.0,
+     171.0,
+     8.6
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_JST_rows",
+    "body_name": "P_JST_rows",
+    "length": 78.0,
+    "width": 19.0,
+    "height": 13.4,
+    "corner": [
+     3.5,
+     130.0,
+     8.6
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_OLED_glass",
+    "body_name": "P_OLED_glass",
+    "length": 34.4,
+    "width": 23.0,
+    "height": 1.5,
+    "corner": [
+     28.8,
+     161.75,
+     35.5
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_OLED_pcb",
+    "body_name": "P_OLED_pcb",
+    "length": 35.4,
+    "width": 33.5,
+    "height": 1.2,
+    "corner": [
+     28.3,
+     156.5,
+     34.3
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_OLED_wires",
+    "body_name": "P_OLED_wires",
+    "length": 12.4,
+    "width": 4.0,
+    "height": 4.0,
+    "corner": [
+     40.0,
+     186.0,
+     30.3
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_Battery",
+    "body_name": "P_Battery",
+    "length": 65.0,
+    "width": 35,
+    "height": 10,
+    "corner": [
+     13.5,
+     83.0,
+     3
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_AntennaZone",
+    "body_name": "P_AntennaZone",
+    "length": 55.0,
+    "width": 3.0,
+    "height": 19.0,
+    "corner": [
+     18.5,
+     194.5,
+     15.5
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_SmdKeepout1",
+    "diameter": 7.0,
+    "height": 3.0,
+    "base": [
+     8,
+     183.5,
+     4.5
+    ],
+    "operation": "cut",
+    "targets": [
+     "P_PCB_SMD"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_SmdKeepout2",
+    "diameter": 7.0,
+    "height": 3.0,
+    "base": [
+     77,
+     183.5,
+     4.5
+    ],
+    "operation": "cut",
+    "targets": [
+     "P_PCB_SMD"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_SmdKeepout3",
+    "diameter": 7.0,
+    "height": 3.0,
+    "base": [
+     8,
+     126.5,
+     4.5
+    ],
+    "operation": "cut",
+    "targets": [
+     "P_PCB_SMD"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_SmdKeepout4",
+    "diameter": 7.0,
+    "height": 3.0,
+    "base": [
+     77,
+     126.5,
+     4.5
+    ],
+    "operation": "cut",
+    "targets": [
+     "P_PCB_SMD"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_OledHole1",
+    "diameter": 3.0,
+    "height": 2.0,
+    "base": [
+     30.8,
+     187.5,
+     34.0
+    ],
+    "operation": "cut",
+    "targets": [
+     "P_OLED_pcb"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_OledHole2",
+    "diameter": 3.0,
+    "height": 2.0,
+    "base": [
+     61.2,
+     187.5,
+     34.0
+    ],
+    "operation": "cut",
+    "targets": [
+     "P_OLED_pcb"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_OledHole3",
+    "diameter": 3.0,
+    "height": 2.0,
+    "base": [
+     30.8,
+     159.0,
+     34.0
+    ],
+    "operation": "cut",
+    "targets": [
+     "P_OLED_pcb"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_OledHole4",
+    "diameter": 3.0,
+    "height": 2.0,
+    "base": [
+     61.2,
+     159.0,
+     34.0
+    ],
+    "operation": "cut",
+    "targets": [
+     "P_OLED_pcb"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_ButtonX",
+    "body_name": "P_ButtonX",
+    "diameter": 12.0,
+    "height": 23.0,
+    "base": [
+     16,
+     114.0,
+     14.0
+    ],
+    "axis": "Z",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_ButtonHeadX",
+    "body_name": "P_ButtonHeadX",
+    "diameter": 14.0,
+    "height": 2.0,
+    "base": [
+     16,
+     114.0,
+     39.3
+    ],
+    "axis": "Z",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_ButtonY",
+    "body_name": "P_ButtonY",
+    "diameter": 12.0,
+    "height": 23.0,
+    "base": [
+     36,
+     114.0,
+     14.0
+    ],
+    "axis": "Z",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_ButtonHeadY",
+    "body_name": "P_ButtonHeadY",
+    "diameter": 14.0,
+    "height": 2.0,
+    "base": [
+     36,
+     114.0,
+     39.3
+    ],
+    "axis": "Z",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_ButtonZ",
+    "body_name": "P_ButtonZ",
+    "diameter": 12.0,
+    "height": 23.0,
+    "base": [
+     56,
+     114.0,
+     14.0
+    ],
+    "axis": "Z",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_ButtonHeadZ",
+    "body_name": "P_ButtonHeadZ",
+    "diameter": 14.0,
+    "height": 2.0,
+    "base": [
+     56,
+     114.0,
+     39.3
+    ],
+    "axis": "Z",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_ButtonA",
+    "body_name": "P_ButtonA",
+    "diameter": 12.0,
+    "height": 23.0,
+    "base": [
+     76,
+     114.0,
+     14.0
+    ],
+    "axis": "Z",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_ButtonHeadA",
+    "body_name": "P_ButtonHeadA",
+    "diameter": 14.0,
+    "height": 2.0,
+    "base": [
+     76,
+     114.0,
+     39.3
+    ],
+    "axis": "Z",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_WheelBody",
+    "body_name": "P_WheelBody",
+    "diameter": 42.5,
+    "height": 22.0,
+    "base": [
+     46,
+     50.0,
+     11.600000000000001
+    ],
+    "axis": "Z",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_WheelWires",
+    "body_name": "P_WheelWires",
+    "diameter": 42.5,
+    "height": 6.0,
+    "base": [
+     46,
+     50.0,
+     5.600000000000001
+    ],
+    "axis": "Z",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_WheelWiresOut",
+    "body_name": "P_WheelWiresOut",
+    "length": 6.0,
+    "width": 29.0,
+    "height": 6.0,
+    "corner": [
+     43.0,
+     50.0,
+     5.600000000000001
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_WheelWiresUp",
+    "body_name": "P_WheelWiresUp",
+    "length": 6.0,
+    "width": 6.0,
+    "height": 12.4,
+    "corner": [
+     43.0,
+     73.0,
+     5.600000000000001
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "P_WheelWiresRun",
+    "body_name": "P_WheelWiresRun",
+    "length": 6.0,
+    "width": 43.0,
+    "height": 3.0,
+    "corner": [
+     43.0,
+     79.0,
+     15.0
+    ],
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_WheelDial",
+    "body_name": "P_WheelDial",
+    "diameter": 60.0,
+    "height": 26.0,
+    "base": [
+     46,
+     50.0,
+     33.9
+    ],
+    "axis": "Z",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_Switch",
+    "body_name": "P_Switch",
+    "diameter": 12.0,
+    "height": 23.0,
+    "base": [
+     66.5,
+     92.0,
+     25
+    ],
+    "axis": "X",
+    "operation": "new"
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "P_SwitchHead",
+    "body_name": "P_SwitchHead",
+    "diameter": 14.0,
+    "height": 2.0,
+    "base": [
+     91.3,
+     92.0,
+     25
+    ],
+    "axis": "X",
+    "operation": "new"
+   }
+  }
+ ]
+}

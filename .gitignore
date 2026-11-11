@@ -1,0 +1,9 @@
+.pio/
+.pio-cache/
+.vscode/
+.claude/settings.local.json
+.DS_Store
+# Temporary board copy with the vendor FireBeetle model, written and deleted by hardware/export.sh (ticket #50)
+hardware/handrad_pcb/handrad_vendor.kicad_*
+# Vendor CAD (hardware/vendor/), the assembly STEP and the Makera logo files are committed in the private
+# repository and left out of the public export by tools/strip_private.py (ticket #50).

@@ -1,0 +1,30 @@
+** Drc report for handrad.kicad_pcb **
+** Created on 2026-11-11T17:30:05 **
+** Report includes: Errors, Warnings **
+
+** Found 3 DRC violations **
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(67.2000 mm, 34.9500 mm): Segment of J1 on F.Silkscreen
+    @(66.0000 mm, 33.5000 mm): PTH pad 2 [BAT-] of J1
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(67.2000 mm, 32.0000 mm): Segment of J1 on F.Silkscreen
+    @(66.0000 mm, 31.5000 mm): PTH pad 1 [BAT+] of J1
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(67.8100 mm, 32.0000 mm): Segment of J1 on F.Silkscreen
+    @(66.0000 mm, 31.5000 mm): PTH pad 1 [BAT+] of J1
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** Ignored checks **
+    - Footprint has no courtyard defined
+    - Track endpoint not centered on via
+    - Tuning profile track geometries
+    - Footprint doesn't match symbol's footprint filters
+    - Footprint component type doesn't match footprint pads
+
+** End of Report **

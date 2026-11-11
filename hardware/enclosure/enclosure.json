@@ -1,0 +1,3309 @@
+{
+ "commands": [
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "W",
+    "expression": "92.0 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "L",
+    "expression": "200.0 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "H",
+    "expression": "40.0 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "wall",
+    "expression": "2.5 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "floor_t",
+    "expression": "3.0 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "front_t",
+    "expression": "3.0 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "split",
+    "expression": "12.0 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "r_corner",
+    "expression": "10.0 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lip_off",
+    "expression": "1.5 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lip_w",
+    "expression": "1.2 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "lip_h",
+    "expression": "2.0 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "gap",
+    "expression": "0.2 mm"
+   }
+  },
+  {
+   "command": "parameters.add",
+   "params": {
+    "name": "edge_c",
+    "expression": "1.5 mm"
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "Outer",
+    "length": "W",
+    "width": "L",
+    "height": "H",
+    "corner": [
+     0,
+     0,
+     0
+    ],
+    "body_name": "Shell"
+   }
+  },
+  {
+   "command": "solid.fillet",
+   "params": {
+    "name": "CornerRadius",
+    "radius": "r_corner",
+    "edges": [
+     [
+      0,
+      0,
+      20
+     ],
+     [
+      92.0,
+      0,
+      20
+     ],
+     [
+      0,
+      200.0,
+      20
+     ],
+     [
+      92.0,
+      200.0,
+      20
+     ]
+    ]
+   }
+  },
+  {
+   "command": "solid.chamfer",
+   "params": {
+    "name": "FrontEdge",
+    "distance": "edge_c",
+    "edges": [
+     [
+      46.0,
+      0,
+      40.0
+     ]
+    ]
+   }
+  },
+  {
+   "command": "solid.chamfer",
+   "params": {
+    "name": "BottomEdge",
+    "distance": "edge_c",
+    "edges": [
+     [
+      46.0,
+      0,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "command": "solid.split_body",
+   "params": {
+    "name": "Split",
+    "body": "Shell",
+    "plane": {
+     "origin": [
+      0,
+      0,
+      12.0
+     ],
+     "normal": [
+      0,
+      0,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "command": "body.rename",
+   "params": {
+    "body": "Shell",
+    "name": "FrontShell"
+   }
+  },
+  {
+   "command": "body.rename",
+   "params": {
+    "body": "Shell (1)",
+    "name": "BottomTray"
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "floor_t",
+    "name": "TrayCavitySk"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     "wall",
+     "wall"
+    ],
+    "p1": [
+     "W - (wall)",
+     "L - (wall)"
+    ],
+    "radius": "r_corner - (wall)"
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "TrayCavity",
+    "sketch": "TrayCavitySk",
+    "distance": "split",
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "split - 1",
+    "name": "FrontCavitySk"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     "wall",
+     "wall"
+    ],
+    "p1": [
+     "W - (wall)",
+     "L - (wall)"
+    ],
+    "radius": "r_corner - (wall)"
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "FrontCavity",
+    "sketch": "FrontCavitySk",
+    "distance": "H - front_t - split + 1",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "split",
+    "name": "LipSk"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     "lip_off",
+     "lip_off"
+    ],
+    "p1": [
+     "W - (lip_off)",
+     "L - (lip_off)"
+    ],
+    "radius": "r_corner - (lip_off)"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     "lip_off + lip_w",
+     "lip_off + lip_w"
+    ],
+    "p1": [
+     "W - (lip_off + lip_w)",
+     "L - (lip_off + lip_w)"
+    ],
+    "radius": "r_corner - (lip_off + lip_w)"
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "Lip",
+    "sketch": "LipSk",
+    "distance": "lip_h",
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "split",
+    "name": "GrooveSk"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     "lip_off - gap",
+     "lip_off - gap"
+    ],
+    "p1": [
+     "W - (lip_off - gap)",
+     "L - (lip_off - gap)"
+    ],
+    "radius": "r_corner - (lip_off - gap)"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     "lip_off + lip_w + gap",
+     "lip_off + lip_w + gap"
+    ],
+    "p1": [
+     "W - (lip_off + lip_w + gap)",
+     "L - (lip_off + lip_w + gap)"
+    ],
+    "radius": "r_corner - (lip_off + lip_w + gap)"
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "H",
+    "name": "FieldsSk"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     22.0,
+     159.5
+    ],
+    "p1": [
+     70.0,
+     191.0
+    ],
+    "radius": 4.0
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     5.5,
+     95.0
+    ],
+    "p1": [
+     86.5,
+     126.0
+    ],
+    "radius": 5.0
+   }
+  },
+  {
+   "command": "sketch.circle.center",
+   "params": {
+    "center": [
+     46,
+     50.0
+    ],
+    "diameter": 72.0
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "Fields",
+    "sketch": "FieldsSk",
+    "distance": 0.6,
+    "direction": "negative",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.chamfer",
+   "params": {
+    "name": "FieldChamfer",
+    "distance": 0.3,
+    "body": "FrontShell",
+    "edges": [
+     [
+      46.0,
+      191.0,
+      40.0
+     ],
+     [
+      46.0,
+      126.0,
+      40.0
+     ],
+     [
+      82.0,
+      50.0,
+      40.0
+     ]
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "FrontBoss1",
+    "diameter": 8.0,
+    "height": 25.0,
+    "base": [
+     8,
+     192.0,
+     12.0
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "FrontWeb1",
+    "length": 5,
+    "width": 5,
+    "height": 25.0,
+    "corner": [
+     3,
+     192.0,
+     12.0
+    ],
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "FrontBoss2",
+    "diameter": 8.0,
+    "height": 25.0,
+    "base": [
+     84,
+     192.0,
+     12.0
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "FrontWeb2",
+    "length": 5.0,
+    "width": 5,
+    "height": 25.0,
+    "corner": [
+     84,
+     192.0,
+     12.0
+    ],
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "FrontBoss3",
+    "diameter": 8.0,
+    "height": 25.0,
+    "base": [
+     8,
+     8.0,
+     12.0
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "FrontWeb3",
+    "length": 5,
+    "width": 5.0,
+    "height": 25.0,
+    "corner": [
+     3,
+     3.0,
+     12.0
+    ],
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "FrontBoss4",
+    "diameter": 8.0,
+    "height": 25.0,
+    "base": [
+     84,
+     8.0,
+     12.0
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "FrontWeb4",
+    "length": 5.0,
+    "width": 5.0,
+    "height": 25.0,
+    "corner": [
+     84,
+     3.0,
+     12.0
+    ],
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "Groove",
+    "sketch": "GrooveSk",
+    "distance": "lip_h + gap",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "InsertHole1",
+    "diameter": 4.0,
+    "height": 7.0,
+    "base": [
+     8,
+     192.0,
+     11.0
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "InsertHole2",
+    "diameter": 4.0,
+    "height": 7.0,
+    "base": [
+     84,
+     192.0,
+     11.0
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "InsertHole3",
+    "diameter": 4.0,
+    "height": 7.0,
+    "base": [
+     8,
+     8.0,
+     11.0
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "InsertHole4",
+    "diameter": 4.0,
+    "height": 7.0,
+    "base": [
+     84,
+     8.0,
+     11.0
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "OledWindow",
+    "length": 30.4,
+    "width": 15.7,
+    "height": 5.0,
+    "corner": [
+     30.8,
+     167.45,
+     36.0
+    ],
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "HeaderPocket",
+    "length": 11.0,
+    "width": 3.0,
+    "height": 1.3,
+    "corner": [
+     40.7,
+     186.7,
+     36.5
+    ],
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "OledFlexRelief",
+    "length": 23.0,
+    "width": 11.0,
+    "height": 0.9,
+    "corner": [
+     34.5,
+     156.0,
+     36.5
+    ],
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "OledShoulder1",
+    "diameter": 5.0,
+    "height": 1.5,
+    "base": [
+     30.8,
+     187.5,
+     35.5
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "OledPin1",
+    "diameter": 2.8,
+    "height": 5.4,
+    "base": [
+     30.8,
+     187.5,
+     32.1
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "OledShoulder2",
+    "diameter": 5.0,
+    "height": 1.5,
+    "base": [
+     61.2,
+     187.5,
+     35.5
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "OledPin2",
+    "diameter": 2.8,
+    "height": 5.4,
+    "base": [
+     61.2,
+     187.5,
+     32.1
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "OledShoulder3",
+    "diameter": 5.0,
+    "height": 1.5,
+    "base": [
+     30.8,
+     159.0,
+     35.5
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "OledPin3",
+    "diameter": 2.8,
+    "height": 5.4,
+    "base": [
+     30.8,
+     159.0,
+     32.1
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "OledShoulder4",
+    "diameter": 5.0,
+    "height": 1.5,
+    "base": [
+     61.2,
+     159.0,
+     35.5
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "OledPin4",
+    "diameter": 2.8,
+    "height": 5.4,
+    "base": [
+     61.2,
+     159.0,
+     32.1
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": 39.4,
+    "name": "WindowChamferSk"
+   }
+  },
+  {
+   "command": "sketch.rectangle.two_point",
+   "params": {
+    "p0": [
+     28.8,
+     165.45
+    ],
+    "p1": [
+     63.2,
+     185.15
+    ]
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "WindowChamfer",
+    "sketch": "WindowChamferSk",
+    "distance": 1.0,
+    "direction": "negative",
+    "taper": "-63.434949 deg",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "ButtonHole1",
+    "diameter": 12.2,
+    "height": 5.0,
+    "base": [
+     16,
+     114.0,
+     36.0
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "ButtonHole2",
+    "diameter": 12.2,
+    "height": 5.0,
+    "base": [
+     36,
+     114.0,
+     36.0
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "ButtonHole3",
+    "diameter": 12.2,
+    "height": 5.0,
+    "base": [
+     56,
+     114.0,
+     36.0
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "ButtonHole4",
+    "diameter": 12.2,
+    "height": 5.0,
+    "base": [
+     76,
+     114.0,
+     36.0
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "WheelPot",
+    "diameter": 65.0,
+    "height": 6.399999999999999,
+    "base": [
+     46,
+     50.0,
+     31.1
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "WheelCutout",
+    "diameter": 43.0,
+    "height": 10.899999999999999,
+    "base": [
+     46,
+     50.0,
+     30.1
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "WheelHole1",
+    "diameter": 3.5,
+    "height": 4.5,
+    "base": [
+     46.0,
+     75.4,
+     30.1
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "WheelHole2",
+    "diameter": 3.5,
+    "height": 4.5,
+    "base": [
+     67.997,
+     37.3,
+     30.1
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "WheelHole3",
+    "diameter": 3.5,
+    "height": 4.5,
+    "base": [
+     24.003,
+     37.3,
+     30.1
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "ButtonPocket1",
+    "diameter": 15.0,
+    "height": 2.0,
+    "base": [
+     16,
+     114.0,
+     39.0
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "ButtonPocket2",
+    "diameter": 15.0,
+    "height": 2.0,
+    "base": [
+     36,
+     114.0,
+     39.0
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "ButtonPocket3",
+    "diameter": 15.0,
+    "height": 2.0,
+    "base": [
+     56,
+     114.0,
+     39.0
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "ButtonPocket4",
+    "diameter": 15.0,
+    "height": 2.0,
+    "base": [
+     76,
+     114.0,
+     39.0
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "WheelPocket",
+    "diameter": 61.0,
+    "height": 7.399999999999999,
+    "base": [
+     46,
+     50.0,
+     33.6
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.chamfer",
+   "params": {
+    "name": "PocketChamfer",
+    "distance": 0.3,
+    "body": "FrontShell",
+    "edges": [
+     [
+      23.5,
+      114.0,
+      39.4
+     ],
+     [
+      43.5,
+      114.0,
+      39.4
+     ],
+     [
+      63.5,
+      114.0,
+      39.4
+     ],
+     [
+      83.5,
+      114.0,
+      39.4
+     ],
+     [
+      76.5,
+      50.0,
+      39.4
+     ]
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "SwitchHole",
+    "diameter": 12.2,
+    "height": 5.5,
+    "base": [
+     88.0,
+     92.0,
+     25
+    ],
+    "axis": "X",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "YZ",
+    "offset": -1,
+    "name": "UsbSk"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     163.83,
+     20.72
+    ],
+    "p1": [
+     173.77,
+     24.880000000000003
+    ],
+    "radius": 1.8
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "UsbCutout",
+    "sketch": "UsbSk",
+    "distance": 4.5,
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "YZ",
+    "offset": -1,
+    "name": "UsbRecessSk"
+   }
+  },
+  {
+   "command": "sketch.rectangle.rounded",
+   "params": {
+    "p0": [
+     161.3,
+     18.3
+    ],
+    "p1": [
+     176.3,
+     27.3
+    ],
+    "radius": 2.0
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "UsbRecess",
+    "sketch": "UsbRecessSk",
+    "distance": 2.3,
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "SwitchPocket",
+    "diameter": 15.0,
+    "height": 2.0,
+    "base": [
+     91.0,
+     92.0,
+     25
+    ],
+    "axis": "X",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.chamfer",
+   "params": {
+    "name": "SwitchPocketChamfer",
+    "distance": 0.3,
+    "body": "FrontShell",
+    "edges": [
+     [
+      92.0,
+      99.5,
+      25
+     ]
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "AntennaRecess",
+    "length": 51.0,
+    "width": 0.8,
+    "height": 16.0,
+    "corner": [
+     20.5,
+     197.0,
+     17.0
+    ],
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": 39.4,
+    "name": "AxisLabelSk"
+   }
+  },
+  {
+   "command": "sketch.text",
+   "params": {
+    "text": "X",
+    "at": [
+     16,
+     99.7
+    ],
+    "height": 5.0,
+    "align": "center"
+   }
+  },
+  {
+   "command": "sketch.text",
+   "params": {
+    "text": "Y",
+    "at": [
+     36,
+     99.7
+    ],
+    "height": 5.0,
+    "align": "center"
+   }
+  },
+  {
+   "command": "sketch.text",
+   "params": {
+    "text": "Z",
+    "at": [
+     56,
+     99.7
+    ],
+    "height": 5.0,
+    "align": "center"
+   }
+  },
+  {
+   "command": "sketch.text",
+   "params": {
+    "text": "A",
+    "at": [
+     76,
+     99.7
+    ],
+    "height": 5.0,
+    "align": "center"
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "AxisLabels",
+    "sketch": "AxisLabelSk",
+    "distance": 0.6,
+    "direction": "negative",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "YZ",
+    "offset": "W",
+    "name": "SwitchLabelSk"
+   }
+  },
+  {
+   "command": "sketch.text",
+   "params": {
+    "text": "I/O",
+    "at": [
+     101.3,
+     23.0
+    ],
+    "height": 4.0,
+    "align": "left"
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "SwitchLabel",
+    "sketch": "SwitchLabelSk",
+    "distance": 0.5,
+    "direction": "negative",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "XY",
+    "offset": "H",
+    "name": "LogoSk"
+   }
+  },
+  {
+   "command": "sketch.text",
+   "params": {
+    "text": "MPG",
+    "at": [
+     23.7845,
+     136.0
+    ],
+    "height": 14.0,
+    "font": "Helvetica",
+    "bold": true
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "Logo",
+    "sketch": "LogoSk",
+    "distance": 0.6,
+    "direction": "negative",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "YZ",
+    "offset": -1,
+    "name": "GripLSk"
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     188.0,
+     15.299999999999999
+    ],
+    "p1": [
+     188.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     184.0,
+     15.299999999999999
+    ],
+    "p1": [
+     184.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     180.0,
+     15.299999999999999
+    ],
+    "p1": [
+     180.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     156.0,
+     15.299999999999999
+    ],
+    "p1": [
+     156.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     152.0,
+     15.299999999999999
+    ],
+    "p1": [
+     152.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     148.0,
+     15.299999999999999
+    ],
+    "p1": [
+     148.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     144.0,
+     15.299999999999999
+    ],
+    "p1": [
+     144.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     140.0,
+     15.299999999999999
+    ],
+    "p1": [
+     140.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     136.0,
+     15.299999999999999
+    ],
+    "p1": [
+     136.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     132.0,
+     15.299999999999999
+    ],
+    "p1": [
+     132.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     128.0,
+     15.299999999999999
+    ],
+    "p1": [
+     128.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     124.0,
+     15.299999999999999
+    ],
+    "p1": [
+     124.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     120.0,
+     15.299999999999999
+    ],
+    "p1": [
+     120.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     116.0,
+     15.299999999999999
+    ],
+    "p1": [
+     116.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     112.0,
+     15.299999999999999
+    ],
+    "p1": [
+     112.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     108.0,
+     15.299999999999999
+    ],
+    "p1": [
+     108.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     104.0,
+     15.299999999999999
+    ],
+    "p1": [
+     104.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     100.0,
+     15.299999999999999
+    ],
+    "p1": [
+     100.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     96.0,
+     15.299999999999999
+    ],
+    "p1": [
+     96.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     92.0,
+     15.299999999999999
+    ],
+    "p1": [
+     92.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     88.0,
+     15.299999999999999
+    ],
+    "p1": [
+     88.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     84.0,
+     15.299999999999999
+    ],
+    "p1": [
+     84.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     80.0,
+     15.299999999999999
+    ],
+    "p1": [
+     80.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     76.0,
+     15.299999999999999
+    ],
+    "p1": [
+     76.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     72.0,
+     15.299999999999999
+    ],
+    "p1": [
+     72.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     68.0,
+     15.299999999999999
+    ],
+    "p1": [
+     68.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     64.0,
+     15.299999999999999
+    ],
+    "p1": [
+     64.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     60.0,
+     15.299999999999999
+    ],
+    "p1": [
+     60.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     56.0,
+     15.299999999999999
+    ],
+    "p1": [
+     56.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     52.0,
+     15.299999999999999
+    ],
+    "p1": [
+     52.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     48.0,
+     15.299999999999999
+    ],
+    "p1": [
+     48.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     44.0,
+     15.299999999999999
+    ],
+    "p1": [
+     44.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     40.0,
+     15.299999999999999
+    ],
+    "p1": [
+     40.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     36.0,
+     15.299999999999999
+    ],
+    "p1": [
+     36.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     32.0,
+     15.299999999999999
+    ],
+    "p1": [
+     32.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     28.0,
+     15.299999999999999
+    ],
+    "p1": [
+     28.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     24.0,
+     15.299999999999999
+    ],
+    "p1": [
+     24.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     20.0,
+     15.299999999999999
+    ],
+    "p1": [
+     20.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     16.0,
+     15.299999999999999
+    ],
+    "p1": [
+     16.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     12.0,
+     15.299999999999999
+    ],
+    "p1": [
+     12.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "GripL",
+    "sketch": "GripLSk",
+    "distance": 1.8,
+    "direction": "positive",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "sketch.create",
+   "params": {
+    "plane": "YZ",
+    "offset": 93.0,
+    "name": "GripRSk"
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     188.0,
+     15.299999999999999
+    ],
+    "p1": [
+     188.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     184.0,
+     15.299999999999999
+    ],
+    "p1": [
+     184.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     180.0,
+     15.299999999999999
+    ],
+    "p1": [
+     180.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     176.0,
+     15.299999999999999
+    ],
+    "p1": [
+     176.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     172.0,
+     15.299999999999999
+    ],
+    "p1": [
+     172.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     168.0,
+     15.299999999999999
+    ],
+    "p1": [
+     168.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     164.0,
+     15.299999999999999
+    ],
+    "p1": [
+     164.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     160.0,
+     15.299999999999999
+    ],
+    "p1": [
+     160.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     156.0,
+     15.299999999999999
+    ],
+    "p1": [
+     156.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     152.0,
+     15.299999999999999
+    ],
+    "p1": [
+     152.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     148.0,
+     15.299999999999999
+    ],
+    "p1": [
+     148.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     144.0,
+     15.299999999999999
+    ],
+    "p1": [
+     144.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     140.0,
+     15.299999999999999
+    ],
+    "p1": [
+     140.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     136.0,
+     15.299999999999999
+    ],
+    "p1": [
+     136.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     132.0,
+     15.299999999999999
+    ],
+    "p1": [
+     132.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     128.0,
+     15.299999999999999
+    ],
+    "p1": [
+     128.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     124.0,
+     15.299999999999999
+    ],
+    "p1": [
+     124.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     120.0,
+     15.299999999999999
+    ],
+    "p1": [
+     120.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     116.0,
+     15.299999999999999
+    ],
+    "p1": [
+     116.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     112.0,
+     15.299999999999999
+    ],
+    "p1": [
+     112.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     80.0,
+     15.299999999999999
+    ],
+    "p1": [
+     80.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     76.0,
+     15.299999999999999
+    ],
+    "p1": [
+     76.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     72.0,
+     15.299999999999999
+    ],
+    "p1": [
+     72.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     68.0,
+     15.299999999999999
+    ],
+    "p1": [
+     68.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     64.0,
+     15.299999999999999
+    ],
+    "p1": [
+     64.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     60.0,
+     15.299999999999999
+    ],
+    "p1": [
+     60.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     56.0,
+     15.299999999999999
+    ],
+    "p1": [
+     56.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     52.0,
+     15.299999999999999
+    ],
+    "p1": [
+     52.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     48.0,
+     15.299999999999999
+    ],
+    "p1": [
+     48.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     44.0,
+     15.299999999999999
+    ],
+    "p1": [
+     44.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     40.0,
+     15.299999999999999
+    ],
+    "p1": [
+     40.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     36.0,
+     15.299999999999999
+    ],
+    "p1": [
+     36.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     32.0,
+     15.299999999999999
+    ],
+    "p1": [
+     32.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     28.0,
+     15.299999999999999
+    ],
+    "p1": [
+     28.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     24.0,
+     15.299999999999999
+    ],
+    "p1": [
+     24.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     20.0,
+     15.299999999999999
+    ],
+    "p1": [
+     20.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     16.0,
+     15.299999999999999
+    ],
+    "p1": [
+     16.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.slot.overall",
+   "params": {
+    "p0": [
+     12.0,
+     15.299999999999999
+    ],
+    "p1": [
+     12.0,
+     37.0
+    ],
+    "width": 1.0
+   }
+  },
+  {
+   "command": "sketch.finish",
+   "params": {}
+  },
+  {
+   "command": "solid.extrude",
+   "params": {
+    "name": "GripR",
+    "sketch": "GripRSk",
+    "distance": 1.8,
+    "direction": "negative",
+    "operation": "cut",
+    "targets": [
+     "FrontShell"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "TrayFoot1",
+    "diameter": 10.0,
+    "height": 3.5,
+    "base": [
+     8,
+     192.0,
+     3.0
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "TrayColumn1",
+    "diameter": 7.0,
+    "height": 5.5,
+    "base": [
+     8,
+     192.0,
+     6.5
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "TrayWeb1",
+    "length": 5,
+    "width": 5,
+    "height": 10.0,
+    "corner": [
+     3,
+     192.0,
+     2.0
+    ],
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Counterbore1",
+    "diameter": 6.5,
+    "height": 7.0,
+    "base": [
+     8,
+     192.0,
+     -1
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "ScrewHole1",
+    "diameter": 3.4,
+    "height": 14.0,
+    "base": [
+     8,
+     192.0,
+     -1
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "TrayFoot2",
+    "diameter": 10.0,
+    "height": 3.5,
+    "base": [
+     84,
+     192.0,
+     3.0
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "TrayColumn2",
+    "diameter": 7.0,
+    "height": 5.5,
+    "base": [
+     84,
+     192.0,
+     6.5
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "TrayWeb2",
+    "length": 5.0,
+    "width": 5,
+    "height": 10.0,
+    "corner": [
+     84,
+     192.0,
+     2.0
+    ],
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Counterbore2",
+    "diameter": 6.5,
+    "height": 7.0,
+    "base": [
+     84,
+     192.0,
+     -1
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "ScrewHole2",
+    "diameter": 3.4,
+    "height": 14.0,
+    "base": [
+     84,
+     192.0,
+     -1
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "TrayFoot3",
+    "diameter": 10.0,
+    "height": 3.5,
+    "base": [
+     8,
+     8.0,
+     3.0
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "TrayColumn3",
+    "diameter": 7.0,
+    "height": 5.5,
+    "base": [
+     8,
+     8.0,
+     6.5
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "TrayWeb3",
+    "length": 5,
+    "width": 5.0,
+    "height": 10.0,
+    "corner": [
+     3,
+     3.0,
+     2.0
+    ],
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Counterbore3",
+    "diameter": 6.5,
+    "height": 7.0,
+    "base": [
+     8,
+     8.0,
+     -1
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "ScrewHole3",
+    "diameter": 3.4,
+    "height": 14.0,
+    "base": [
+     8,
+     8.0,
+     -1
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "TrayFoot4",
+    "diameter": 10.0,
+    "height": 3.5,
+    "base": [
+     84,
+     8.0,
+     3.0
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "TrayColumn4",
+    "diameter": 7.0,
+    "height": 5.5,
+    "base": [
+     84,
+     8.0,
+     6.5
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "TrayWeb4",
+    "length": 5.0,
+    "width": 5.0,
+    "height": 10.0,
+    "corner": [
+     84,
+     3.0,
+     2.0
+    ],
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Counterbore4",
+    "diameter": 6.5,
+    "height": 7.0,
+    "base": [
+     84,
+     8.0,
+     -1
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "ScrewHole4",
+    "diameter": 3.4,
+    "height": 14.0,
+    "base": [
+     84,
+     8.0,
+     -1
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Standoff1",
+    "diameter": 6.0,
+    "height": 4.0,
+    "base": [
+     8,
+     183.5,
+     3.0
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Pilot1",
+    "diameter": 2.5,
+    "height": 6.0,
+    "base": [
+     8,
+     183.5,
+     1.5
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Standoff2",
+    "diameter": 6.0,
+    "height": 4.0,
+    "base": [
+     77,
+     183.5,
+     3.0
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Pilot2",
+    "diameter": 2.5,
+    "height": 6.0,
+    "base": [
+     77,
+     183.5,
+     1.5
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Standoff3",
+    "diameter": 6.0,
+    "height": 4.0,
+    "base": [
+     8,
+     126.5,
+     3.0
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Pilot3",
+    "diameter": 2.5,
+    "height": 6.0,
+    "base": [
+     8,
+     126.5,
+     1.5
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Standoff4",
+    "diameter": 6.0,
+    "height": 4.0,
+    "base": [
+     77,
+     126.5,
+     3.0
+    ],
+    "axis": "Z",
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.cylinder",
+   "params": {
+    "name": "Pilot4",
+    "diameter": 2.5,
+    "height": 6.0,
+    "base": [
+     77,
+     126.5,
+     1.5
+    ],
+    "axis": "Z",
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "RibTop",
+    "length": 69.2,
+    "width": 1.6,
+    "height": 4.0,
+    "corner": [
+     11.4,
+     118.5,
+     3.0
+    ],
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "RibBottom",
+    "length": 69.2,
+    "width": 1.6,
+    "height": 4.0,
+    "corner": [
+     11.4,
+     80.9,
+     3.0
+    ],
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "RibLeftA",
+    "length": 1.6,
+    "width": 9.5,
+    "height": 4.0,
+    "corner": [
+     11.4,
+     109.0,
+     3.0
+    ],
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "RibLeftB",
+    "length": 1.6,
+    "width": 9.5,
+    "height": 4.0,
+    "corner": [
+     11.4,
+     82.5,
+     3.0
+    ],
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "RibRightA",
+    "length": 1.6,
+    "width": 6.0,
+    "height": 4.0,
+    "corner": [
+     79.0,
+     112.5,
+     3.0
+    ],
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "RibRightB",
+    "length": 1.6,
+    "width": 6.0,
+    "height": 4.0,
+    "corner": [
+     79.0,
+     82.5,
+     3.0
+    ],
+    "operation": "join",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "StrapSlot1",
+    "length": 2.5,
+    "width": 17.0,
+    "height": 4.01,
+    "corner": [
+     10.0,
+     92.0,
+     -1
+    ],
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "StrapSlot2",
+    "length": 2.5,
+    "width": 17.0,
+    "height": 4.01,
+    "corner": [
+     79.5,
+     92.0,
+     -1
+    ],
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  },
+  {
+   "command": "solid.box",
+   "params": {
+    "name": "StrapChannel",
+    "length": 72.0,
+    "width": 17.0,
+    "height": 2.5,
+    "corner": [
+     10.0,
+     92.0,
+     -1
+    ],
+    "operation": "cut",
+    "targets": [
+     "BottomTray"
+    ]
+   }
+  }
+ ]
+}

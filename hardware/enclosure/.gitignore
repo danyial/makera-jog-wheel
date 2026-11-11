@@ -1,0 +1,9 @@
+__pycache__/
+*.sc.bak
+dbg*.json
+.assembly_check_*.json
+# Logo build (make_enclosure.py --logo, ticket #50): local only, the committed outputs stay neutral
+enclosure_logo.json
+handrad_enclosure_logo.sc
+enclosure_logo.step
+front_shell_logo.stl
